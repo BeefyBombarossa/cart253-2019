@@ -15,6 +15,13 @@ let squareX;
 let squareY;
 let squareSize = 100;
 
+// The starting position and size of Ricardo
+let triangleX1 = 30;
+let triangleY1 = 75;
+let triangleX2 = 58;
+let triangleY2 = 20;
+let triangleX3 = 86;
+let triangleY3 = 75;
 
 // preload()
 //
@@ -47,6 +54,9 @@ function setup() {
   rectMode(CENTER);
   // We won't have a stroke in this
   noStroke();
+
+  //Start the triangle at the top
+
 }
 
 
@@ -73,4 +83,14 @@ function draw() {
   fill(0,0,255,10);
   // Display the square
   rect(squareX,squareY,squareSize,squareSize);
+
+  // Move triangle to the bottom left corner
+  triangleX1 = triangleX1 + 1
+  triangleY1 = triangleY1 + 1
+  triangleX2 = triangleX2 + 1
+  triangleY2 = triangleY2 + 1
+  triangleX3 = triangleX3 + 1
+  triangleY3 = triangleY3 + 1
+  fill(127)
+  triangle(triangleX1,triangleY1,triangleX2,triangleY2,triangleX3,triangleY3);
 }
