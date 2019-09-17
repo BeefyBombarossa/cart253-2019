@@ -1,34 +1,29 @@
-// Exercise 1 - Movement
-// Pippin Barr
-//
-// Starter code for exercise 1.
-// Draws a moving square and circle that intersect
-// in the middle of the canvas.
+// I added a triangle and ricardo in
 
 // The current position and size of the circle
 let circleX;
 let circleY;
-let circleSize = 100;
+let circleSize = 50;
 
 // The current position and size of the square
 let squareX;
 let squareY;
-let squareSize = 100;
+let squareSize = 50;
 
-// The starting position and size of Ricardo
+// The starting position and size of the Triangle thing
 let triangleX1 = 30;
-let triangleY1 = 75;
+let triangleY1 = 315;
 let triangleX2 = 58;
-let triangleY2 = 20;
+let triangleY2 = 260;
 let triangleX3 = 86;
-let triangleY3 = 75;
+let triangleY3 = 315;
 
 // preload()
 //
 // Nothing here
 
 function preload() {
-
+img = loadImage('Dancingcardo.gif');
 }
 
 
@@ -55,15 +50,10 @@ function setup() {
   // We won't have a stroke in this
   noStroke();
 
-  //Start the triangle at the top
-
+  loadImage('Dancingcardo.gif', img => {
+      image(img, 0, 0);
+    });
 }
-
-
-// draw()
-//
-// Change the circle and square's positions so they move
-// Draw the circle and square on screen
 
 function draw() {
   // We don't fill the background so we get a drawing effect
@@ -72,7 +62,7 @@ function draw() {
   circleX += 1;
   circleY -= 1;
   // Make the circle transparent red
-  fill(255,0,0,10);
+  fill(255,0,0);
   // Display the circle
   ellipse(circleX,circleY,circleSize,circleSize);
 
@@ -80,17 +70,15 @@ function draw() {
   squareX -= 1;
   squareY -= 1;
   // Make the square transparent blue
-  fill(0,0,255,10);
+  fill(0,0,255);
   // Display the square
   rect(squareX,squareY,squareSize,squareSize);
 
-  // Move triangle to the bottom left corner
+  // This moves the triangle to the left
   triangleX1 = triangleX1 + 1
-  triangleY1 = triangleY1 + 1
   triangleX2 = triangleX2 + 1
-  triangleY2 = triangleY2 + 1
   triangleX3 = triangleX3 + 1
-  triangleY3 = triangleY3 + 1
+  //good ol colors for the triangle
   fill(127)
   triangle(triangleX1,triangleY1,triangleX2,triangleY2,triangleX3,triangleY3);
 }
