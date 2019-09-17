@@ -18,6 +18,10 @@ let triangleY2 = 260;
 let triangleX3 = 86;
 let triangleY3 = 315;
 
+ // Making a figure follow the mouse
+ let imgX;
+ let imgY;
+
 // preload()
 //
 // Nothing here
@@ -42,22 +46,20 @@ function setup() {
 
   // Start the square off screen to the bottom right
   // We divide the size by two because we're drawing from the center
-  squareX = width + squareSize/2;
-  squareY = height + squareSize/2;
+  squareX = 320;
+  squareY = 0;
 
   // We'll draw rectangles from the center
   rectMode(CENTER);
   // We won't have a stroke in this
   noStroke();
 
-  loadImage('Dancingcardo.gif', img => {
-      image(img, 0, 0);
-    });
+  imageMode(CENTER);
 }
 
 function draw() {
   // We don't fill the background so we get a drawing effect
-
+background (255);
   // Move circle up and to the right
   circleX += 1;
   circleY -= 1;
@@ -65,20 +67,26 @@ function draw() {
   fill(255,0,0);
   // Display the circle
   ellipse(circleX,circleY,circleSize,circleSize);
+  //making a square go down from the center
 
-  // Move square up and to the left
-  squareX -= 1;
-  squareY -= 1;
-  // Make the square transparent blue
+  squareY = squareY + 1;
+
   fill(0,0,255);
   // Display the square
   rect(squareX,squareY,squareSize,squareSize);
 
   // This moves the triangle to the left
-  triangleX1 = triangleX1 + 1
-  triangleX2 = triangleX2 + 1
-  triangleX3 = triangleX3 + 1
+  triangleX1 = triangleX1 + 1;
+  triangleX2 = triangleX2 + 1;
+  triangleX3 = triangleX3 + 1;
   //good ol colors for the triangle
-  fill(127)
+  fill(127);
   triangle(triangleX1,triangleY1,triangleX2,triangleY2,triangleX3,triangleY3);
+
+ //Making ricardo follow the mouse
+  imgY = mouseY;
+  imgX = mouseX;
+
+  image(img, imgX, imgY, 180, 180);
+
 }
