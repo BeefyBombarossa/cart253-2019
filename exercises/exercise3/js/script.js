@@ -112,6 +112,8 @@ function setup() {
 
   // And draw it (because it's the last thing drawn, it will always be on top)
   image(targetImage,targetX,targetY);
+
+
 }
 
 
@@ -129,7 +131,7 @@ function draw() {
     fill(random(255));
 
     // Tell them they won!
-    text("YOU WINNED!",width/2,height/2);
+    text("YOU'RE A WEINER!",width/2,height/2);
 
     // Draw a circle around the sausage dog to show where it is (even though
     // they already know because they found it!)
@@ -138,6 +140,18 @@ function draw() {
     strokeWeight(10);
     ellipse(targetX,targetY,targetImage.width,targetImage.height);
   }
+  // Create the rectangle on the top right corner and place the dog inside of it
+  fill(0,0,0);
+  rect(1370,0,150,150);
+  image(targetImage,1450,70);
+
+  // Text indicating the player what to do in the game
+  textFont("Helvetica");
+  textAlign(CENTER,CENTER)
+  textSize(30);
+  fill(255);
+
+  text("Find moi",1445,130);
 }
 
 // mousePressed()
