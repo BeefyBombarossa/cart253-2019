@@ -52,6 +52,8 @@ function preload() {
   decoyImage8 = loadImage("assets/images/animals-08.png");
   decoyImage9 = loadImage("assets/images/animals-09.png");
   decoyImage10 = loadImage("assets/images/animals-10.png");
+
+  sausage = loadImage("sossage.png");
 }
 
 // setup()
@@ -60,7 +62,7 @@ function preload() {
 // of decoys in random positions, then the target
 function setup() {
   createCanvas(windowWidth,windowHeight);
-  background("#ffff00");
+  background("#228B22");
   imageMode(CENTER);
 
   // Use a for loop to draw as many decoys as we need
@@ -128,7 +130,7 @@ function draw() {
     textSize(128);
     textAlign(CENTER,CENTER);
     noStroke();
-    fill(random(255));
+    fill(random(80,230));
 
     // Tell them they won!
     text("YOU'RE A WEINER!",width/2,height/2);
@@ -136,20 +138,25 @@ function draw() {
     // Draw a circle around the sausage dog to show where it is (even though
     // they already know because they found it!)
     noFill();
-    stroke(random(255));
+    stroke(255,0,0);
     strokeWeight(10);
     ellipse(targetX,targetY,targetImage.width,targetImage.height);
+
+    //Sausages begin to rain down in celebration
   }
   // Create the rectangle on the top right corner and place the dog inside of it
-  fill(0,0,0);
-  rect(1370,0,150,150);
+  fill(255);
+  stroke(200,80,60)
+  strokeWeight(5)
+  rect(1367,1,150,150);
   image(targetImage,1450,70);
 
   // Text indicating the player what to do in the game
-  textFont("Helvetica");
+  textFont("Arial");
   textAlign(CENTER,CENTER)
   textSize(30);
-  fill(255);
+  noStroke()
+  fill(0,0,0);
 
   text("Find moi",1445,130);
 }
