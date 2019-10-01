@@ -1,8 +1,8 @@
 "use strict";
 
 /******************************************************************************
-Where's Sausage Dog?
-by Pippin Barr
+Where's Sausage Dog? (The cooler version)
+by Gabriel Garces
 
 An algorithmic version of a Where's Wally/Waldo searching game where you
 need to click on the sausage dog you're searching for in amongst all
@@ -11,6 +11,8 @@ the visual noise of other animals.
 Animal images from:
 https://creativenerds.co.uk/freebies/80-free-wildlife-icons-the-best-ever-animal-icon-set/
 ******************************************************************************/
+
+// The position and size of the victory sausages
 
 // Position and image of the sausage dog we're searching for
 let targetX;
@@ -115,12 +117,11 @@ function setup() {
   // And draw it (because it's the last thing drawn, it will always be on top)
   image(targetImage,targetX,targetY);
 
+  //Now we set up the sausages
 
 }
 
 
-// draw()
-//
 // Displays the game over screen if the player has won,
 // otherwise nothing (all the gameplay stuff is in mousePressed())
 function draw() {
@@ -143,19 +144,20 @@ function draw() {
     ellipse(targetX,targetY,targetImage.width,targetImage.height);
 
     //Sausages begin to rain down in celebration
+
   }
   // Create the rectangle on the top right corner and place the dog inside of it
   fill(255);
-  stroke(200,80,60)
-  strokeWeight(5)
+  stroke(200,80,60);
+  strokeWeight(5);
   rect(1367,1,150,150);
   image(targetImage,1450,70);
 
   // Text indicating the player what to do in the game
   textFont("Arial");
-  textAlign(CENTER,CENTER)
+  textAlign(CENTER,CENTER);
   textSize(30);
-  noStroke()
+  noStroke();
   fill(0,0,0);
 
   text("Find moi",1445,130);
