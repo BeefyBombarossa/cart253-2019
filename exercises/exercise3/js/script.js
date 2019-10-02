@@ -33,10 +33,14 @@ let decoyImage10;
 
 // The number of decoys to show on the screen, randomly
 // chosen from the decoy images
-let numDecoys = 100;
+let numDecoys = 200;
 
 // Keep track of whether they've won
 let gameOver = false;
+
+// The position for the sausage in the corner
+let decorX = 1450
+let decorY = 70
 
 // preload()
 //
@@ -55,7 +59,6 @@ function preload() {
   decoyImage9 = loadImage("assets/images/animals-09.png");
   decoyImage10 = loadImage("assets/images/animals-10.png");
 
-  sausage = loadImage("sossage.png");
 }
 
 // setup()
@@ -126,6 +129,8 @@ function setup() {
 // otherwise nothing (all the gameplay stuff is in mousePressed())
 function draw() {
   if (gameOver) {
+    // the screen turns white
+    background(255)
     // Prepare our typography
     textFont("Helvetica");
     textSize(128);
@@ -143,7 +148,10 @@ function draw() {
     strokeWeight(10);
     ellipse(targetX,targetY,targetImage.width,targetImage.height);
 
-    //Sausages begin to rain down in celebration
+    //Sausage dog moves in celebration
+    image(targetImage,decorX,decorY);
+    decorX = decorX - 0.5
+    decorY++
 
   }
   // Create the rectangle on the top right corner and place the dog inside of it
@@ -151,7 +159,7 @@ function draw() {
   stroke(200,80,60);
   strokeWeight(5);
   rect(1367,1,150,150);
-  image(targetImage,1450,70);
+  image(targetImage,decorX,decorY);
 
   // Text indicating the player what to do in the game
   textFont("Arial");

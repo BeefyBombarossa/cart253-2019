@@ -34,6 +34,8 @@ let playerFill = 50;
 // Prey position, size, velocity
 let preyX;
 let preyY;
+let py = 0.0;
+let px = 0.0;
 let preyRadius = 25;
 let preyVX;
 let preyVY;
@@ -66,6 +68,8 @@ function setup() {
 //
 // Initialises prey's position, velocity, and health
 function setupPrey() {
+  px = random(0,1000);
+  py = random(0,1000);
   preyX = width / 5;
   preyY = height / 2;
   preyVX = -preyMaxSpeed;
@@ -201,8 +205,8 @@ function checkEating() {
     // Check if the prey died (health 0)
     if (preyHealth === 0) {
       // Move the "new" prey to a random position
-      preyX = random(0, width);
-      preyY = random(0, height);
+      px = random(0, width);
+      py = random(0, height);
       // Give it full health
       preyHealth = preyMaxHealth;
       // Track how many prey were eaten
@@ -215,18 +219,14 @@ function checkEating() {
 //
 // Moves the prey based on random velocity changes
 function movePrey() {
+  preyX = width * noise(px)
+  preyY = height * noise(py)
+
+  px += 0.01;
+  py += 0.01;
   // Change the prey's velocity at random intervals
   // random() will be < 0.05 5% of the time, so the prey
   // will change direction on 5% of frames
-  if (random() < 0.05) {
-    // Set velocity based on random values to get a new direction
-    // and speed of movement
-    //
-    // Use map() to convert from the 0-1 range of the random() function
-    // to the appropriate range of velocities for the prey
-    preyVX = map(random(), 0, 1, -preyMaxSpeed, preyMaxSpeed);
-    preyVY = map(random(), 0, 1, -preyMaxSpeed, preyMaxSpeed);
-  }
 
   // Update prey position based on velocity
   preyX = preyX + preyVX;
