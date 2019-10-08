@@ -21,7 +21,7 @@ let gameOver = false;
 // Player position, size, velocity
 let playerX;
 let playerY;
-let playerRadius = 25;
+let playerRadius = 30;
 let playerVX = 0;
 let playerVY = 0;
 let playerMaxSpeed = 2;
@@ -36,7 +36,7 @@ let preyX;
 let preyY;
 let py = 0.0;
 let px = 0.0;
-let preyRadius = 25;
+let preyRadius = 30;
 let preyVX;
 let preyVY;
 let preyMaxSpeed = 4;
@@ -51,19 +51,43 @@ let eatHealth = 10;
 // Number of prey eaten during the game (the "score")
 let preyEaten = 0;
 
+let soviet
+let nazi
+
+let ussr
+
+let title
+
+let started = false;
 // setup()
 //
+function preload() {
+  ussr = loadSound('assets/sounds/USSR.mp3');
+}
 // Sets up the basic elements of the game
 function setup() {
-  createCanvas(500, 500);
+  createCanvas(600, 600);
 
   noStroke();
 
+  setupImage();
+
+  setupSound();
   // We're using simple functions to separate code out
   setupPrey();
   setupPlayer();
 }
 
+function setupImage() {
+  soviet = loadImage('assets/images/Sovs.png');
+  nazi = loadImage('assets/images/Naz.png');
+  title = loadImage('assets/images/Title.jpg');
+  imageMode(CENTER)
+}
+
+function setupSound() {
+  ussr.setVolume(0.5);
+}
 // setupPrey()
 //
 // Initialises prey's position, velocity, and health
@@ -94,7 +118,11 @@ function setupPlayer() {
 // displays the two agents.
 // When the game is over, shows the game over screen.
 function draw() {
-  background(100, 100, 200);
+  image(title, width/2, height/2)
+    if (!started) {
+    }
+    else {
+  background(139,0,0);
 
   if (!gameOver) {
     handleInput();
@@ -111,8 +139,11 @@ function draw() {
   else {
     showGameOver();
   }
+ }
 }
-
+function mousePressed() {
+  started = true;
+}
 // handleInput()
 //
 // Checks arrow keys and adjusts player velocity accordingly
@@ -252,16 +283,16 @@ function movePrey() {
 //
 // Draw the prey as an ellipse with alpha based on health
 function drawPrey() {
-  fill(preyFill, preyHealth);
-  ellipse(preyX, preyY, preyRadius * 2);
+  tint(255, preyHealth);
+  image(nazi, preyX, preyY, preyRadius * 2, preyRadius * 2);
 }
 
 // drawPlayer()
 //
 // Draw the player as an ellipse with alpha value based on health
 function drawPlayer() {
-  fill(playerFill, playerHealth);
-  ellipse(playerX, playerY, playerRadius * 2);
+  tint(255, playerHealth);
+  image(soviet, playerX, playerY, playerRadius * 2, playerRadius * 2);
 }
 
 // showGameOver()
@@ -271,11 +302,13 @@ function showGameOver() {
   // Set up the font
   textSize(32);
   textAlign(CENTER, CENTER);
+  textStyle(BOLD)
   fill(0);
   // Set up the text to display
-  let gameOverText = "GAME OVER\n"; // \n means "new line"
-  gameOverText = gameOverText + "You ate " + preyEaten + " prey\n";
-  gameOverText = gameOverText + "before you died."
+  let gameOverText = "YOU DIED IN THE NAME \nOF THE MOTHERLAND\n"; // \n means "new line"
+  gameOverText = gameOverText + "YOU SENT " + preyEaten + " FASCISTS\n";
+  gameOverText = gameOverText + "TO THE GULAGS."
   // Display it in the centre of the screen
   text(gameOverText, width / 2, height / 2);
+  if (!ussr.isPlaying()) ussr.play()
 }
