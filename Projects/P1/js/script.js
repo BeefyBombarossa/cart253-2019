@@ -52,18 +52,25 @@ let eatHealth = 10;
 let preyEaten = 0;
 
 //Images and Sounds
-let soviet
-let nazi
-let ussr
+let soviet;
+let nazi;
+let ussr;
+let dead;
+let bat;
+let relaxation
 
 //Click to play screen
-let title
+let title;
 let started = false;
 
 //Kill Sounds
-let kill1
-let kill2
-let kill3
+let kill1;
+let kill2;
+let kill3;
+let kill4;
+let kill5;
+let kill6;
+let kill7;
 // setup()
 //
 function preload() {
@@ -71,6 +78,11 @@ function preload() {
   kill1 = loadSound('assets/sounds/Kill 1.mp3');
   kill2 = loadSound('assets/sounds/Kill 2.mp3');
   kill3 = loadSound('assets/sounds/Kill 3.mp3');
+  kill4 = loadSound('assets/sounds/Kill 4.mp3');
+  kill5 = loadSound('assets/sounds/Kill 5.mp3');
+  kill6 = loadSound('assets/sounds/Kill 6.mp3');
+  kill7 = loadSound('assets/sounds/Kill 7.mp3');
+  relaxation = loadSound('assets/sounds/German.Trench.Assault.mp3');
 }
 // Sets up the basic elements of the game
 function setup() {
@@ -90,7 +102,9 @@ function setupImage() {
   soviet = loadImage('assets/images/Sovs.png');
   nazi = loadImage('assets/images/Naz.png');
   title = loadImage('assets/images/Title.jpg');
-  imageMode(CENTER)
+  dead = loadImage('assets/images/End.png');
+  bat = loadImage('assets/images/bat.jpg');
+  imageMode(CENTER);
 }
 
 function setupSound() {
@@ -98,6 +112,12 @@ function setupSound() {
   kill1.setVolume(0.4)
   kill2.setVolume(0.4)
   kill3.setVolume(0.4)
+  kill4.setVolume(0.4)
+  kill5.setVolume(0.4)
+  kill6.setVolume(0.4)
+  kill7.setVolume(0.4)
+  relaxation.setVolume(0.3);
+  relaxation.play();
 }
 // setupPrey()
 //
@@ -129,11 +149,11 @@ function setupPlayer() {
 // displays the two agents.
 // When the game is over, shows the game over screen.
 function draw() {
-  image(title, width/2, height/2)
     if (!started) {
+    image(title, width/2, height/2);
     }
     else {
-  background(139,0,0);
+    image(bat, width/2, height/2);
 
   if (!gameOver) {
     handleInput();
@@ -180,6 +200,17 @@ function handleInput() {
   else {
     playerVY = 0;
   }
+//Sprint button
+    if (keyIsDown(SHIFT) && keyIsDown(UP_ARROW)) {
+      playerVY = -10;
+    } else if (keyIsDown(SHIFT) && keyIsDown(DOWN_ARROW)) {
+      playerVY = 10;
+    }
+  if (keyIsDown(SHIFT) && keyIsDown(LEFT_ARROW)) {
+    playerVX = -10;
+  } else if (keyIsDown(SHIFT) && keyIsDown(RIGHT_ARROW)) {
+    playerVX = 10;
+  }
 }
 
 // movePlayer()
@@ -218,6 +249,10 @@ function movePlayer() {
 function updateHealth() {
   // Reduce player health
   playerHealth = playerHealth - 0.5;
+ //Reduce player health when running
+ if (keyIsDown(SHIFT)) {
+    playerHealth = playerHealth - 2;
+  }
   // Constrain the result to a sensible range
   playerHealth = constrain(playerHealth, 0, playerMaxHealth);
   // Check if the player is dead (0 health)
@@ -253,16 +288,9 @@ function checkEating() {
       preyHealth = preyMaxHealth;
       // Track how many prey were eaten
       preyEaten = preyEaten + 1;
-
-      if (r < 0.3) {
-      (!kill1.isPlaying())kill1.play();
-    }
-    else if (r < 0.6) {
-      (!kill2.isPlaying()) kill2.play();
-    }
-    else if (r < 1.0) {
-      (!kill3.isPlaying()) kill3.play();
-    }
+    let keel = [kill1, kill2, kill3, kill4, kill5, kill6, kill7];
+    let kill = random(keel);
+      random(keel).play();
     }
   }
 }
@@ -270,8 +298,8 @@ function checkEating() {
 //
 // Moves the prey based on random velocity changes
 function movePrey() {
-  preyX = width * noise(px)
-  preyY = height * noise(py)
+  preyX = width * noise(px);
+  preyY = height * noise(py);
 
   px += 0.01;
   py += 0.01;
@@ -319,16 +347,18 @@ function drawPlayer() {
 //
 // Display text about the game being over!
 function showGameOver() {
-  // Set up the font
-  textSize(32);
+  relaxation.stop();
+  background(137,0,0);
+  textFont("Impact");
+  textSize(40);
   textAlign(CENTER, CENTER);
-  textStyle(BOLD)
-  fill(0);
+  fill(255);
   // Set up the text to display
   let gameOverText = "YOU DIED IN THE NAME \nOF THE MOTHERLAND\n"; // \n means "new line"
-  gameOverText = gameOverText + "YOU SENT " + preyEaten + " FASCISTS\n";
+  gameOverText = gameOverText + "AND SENT " + preyEaten + " FASCISTS\n";
   gameOverText = gameOverText + "TO THE GULAGS."
   // Display it in the centre of the screen
   text(gameOverText, width / 2, height / 2);
-  if (!ussr.isPlaying()) ussr.play()
+  if (!ussr.isPlaying()) ussr.play();
+
 }
