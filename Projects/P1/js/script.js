@@ -51,18 +51,26 @@ let eatHealth = 10;
 // Number of prey eaten during the game (the "score")
 let preyEaten = 0;
 
+//Images and Sounds
 let soviet
 let nazi
-
 let ussr
 
+//Click to play screen
 let title
-
 let started = false;
+
+//Kill Sounds
+let kill1
+let kill2
+let kill3
 // setup()
 //
 function preload() {
   ussr = loadSound('assets/sounds/USSR.mp3');
+  kill1 = loadSound('assets/sounds/Kill 1.mp3');
+  kill2 = loadSound('assets/sounds/Kill 2.mp3');
+  kill3 = loadSound('assets/sounds/Kill 3.mp3');
 }
 // Sets up the basic elements of the game
 function setup() {
@@ -87,6 +95,9 @@ function setupImage() {
 
 function setupSound() {
   ussr.setVolume(0.5);
+  kill1.setVolume(0.4)
+  kill2.setVolume(0.4)
+  kill3.setVolume(0.4)
 }
 // setupPrey()
 //
@@ -242,10 +253,19 @@ function checkEating() {
       preyHealth = preyMaxHealth;
       // Track how many prey were eaten
       preyEaten = preyEaten + 1;
+
+      if (r < 0.3) {
+      (!kill1.isPlaying())kill1.play();
+    }
+    else if (r < 0.6) {
+      (!kill2.isPlaying()) kill2.play();
+    }
+    else if (r < 1.0) {
+      (!kill3.isPlaying()) kill3.play();
+    }
     }
   }
 }
-
 // movePrey()
 //
 // Moves the prey based on random velocity changes
