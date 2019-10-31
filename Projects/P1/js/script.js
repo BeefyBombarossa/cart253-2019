@@ -2,13 +2,10 @@
 
 /******************************************************
 
-Game - Chaser
-Pippin Barr
+Game - For the soviets
+Gabriel Garces
 
-A "simple" game of cat and mouse. The player is a circle and can move with keys,
-if they overlap the (randomly moving) prey they "eat it" by sucking out its life
-and adding it to their own. The player "dies" slowly over time so they have to keep
-eating to stay alive.
+You're a lone soviet warrior who must fight in order to take out the fascists. Do it for the Motherland and bring glory back to mother Russia 
 
 Includes: Physics-based movement, keyboard controls, health/stamina,
 random movement, screen wrap.
