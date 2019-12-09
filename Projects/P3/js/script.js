@@ -72,10 +72,7 @@ function draw() {
       paddle.move('left');
     } else if (keyIsDown(68)) {
       paddle.move('right');
-    }else if (keyIsDown(68)) {
-      paddle.move('right');
-      else if (keyIsDown(68)) {
-        paddle.move('right');
+    }
 //Making the bricks disappear... like MAGIC
     for (let i = bricks.length - 1; i >= 0; i--) {
       const brick = bricks[i];
