@@ -18,4 +18,13 @@ class Paddle {
     rect(this.location.x, this.location.y, this.width, this.height);
   }
 
-  
+  move(direction) {
+    this.location.add(this.speed[direction])
+
+    if(this.location.x < 0) {
+      this.location.x = 0
+    } else if(this.location.x + this.width > width) {
+      this.location.x = width - this.width
+    }
+  }
+}
