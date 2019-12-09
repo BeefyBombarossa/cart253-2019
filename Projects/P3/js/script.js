@@ -19,7 +19,7 @@ yes = loadSound('assets/sounds/Yes.mp3');
 dok = loadSound('assets/sounds/dok.mp3');
 oof = loadSound('assets/sounds/oof.mp3');
 }
-console.log();
+
 function setup() {
   createCanvas(windowWidth, windowHeight);
 
